@@ -23,7 +23,7 @@ public class CustomErrorController implements ErrorController {
                     modelAndView.addObject("reason", HttpStatus.NOT_FOUND.getReasonPhrase());
                 } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                     modelAndView.addObject("status", statusCode);
-                    modelAndView.addObject("reason", HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                    modelAndView.addObject("reason", HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
                 }
             }
         modelAndView.setViewName("error");
