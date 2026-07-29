@@ -4,6 +4,7 @@ import com.example.demo_SpringBoot.controller.dto.UserCreateRequestDto;
 import com.example.demo_SpringBoot.service.User;
 import com.example.demo_SpringBoot.service.UserService;
 import com.example.demo_SpringBoot.service.UserServiceInterface;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -60,7 +61,7 @@ public class UserController {
 
     @PostMapping("")
     @ResponseBody
-    public User save(@RequestBody UserCreateRequestDto request) {
+    public User save(@RequestBody @Valid UserCreateRequestDto request) {
         User user = userService.save(request.getName(), request.getAge(), request.getJob(), request.getSpecialty());
         return user;
     }
