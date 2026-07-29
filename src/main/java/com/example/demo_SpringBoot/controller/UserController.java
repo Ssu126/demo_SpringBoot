@@ -2,6 +2,7 @@ package com.example.demo_SpringBoot.controller;
 
 import com.example.demo_SpringBoot.service.User;
 import com.example.demo_SpringBoot.service.UserService;
+import com.example.demo_SpringBoot.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private UserServiceInterface userService;
 
     @GetMapping("")
     public ModelAndView userPage() {
