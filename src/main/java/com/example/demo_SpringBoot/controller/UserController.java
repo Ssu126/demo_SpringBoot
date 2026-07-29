@@ -3,17 +3,14 @@ package com.example.demo_SpringBoot.controller;
 import com.example.demo_SpringBoot.controller.dto.UserCreateRequestDto;
 import com.example.demo_SpringBoot.service.User;
 import com.example.demo_SpringBoot.service.UserService;
-import com.example.demo_SpringBoot.service.UserServiceInterface;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserController {
-    UserServiceInterface userService;
+    UserService userService;
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -31,7 +28,7 @@ public class UserController {
     @GetMapping("/bean")
     @ResponseBody
     public String bean() {
-        return applicationContext.getBean(UserServiceInterface.class).toString();
+        return applicationContext.getBean(IRepository.class).toString();
     }
 
     @GetMapping("")
