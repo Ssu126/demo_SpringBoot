@@ -1,10 +1,13 @@
 package com.example.demo_SpringBoot.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserService implements UserServiceInterface {
+@Service
+public class AUserService implements UserServiceInterface {
     private static final Map<Integer, User> users;
 
     static {
