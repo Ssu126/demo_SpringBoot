@@ -60,7 +60,7 @@ public class UserController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
-    public User save(@ModelAttribute UserCreateRequestDto request) {
+    public User save(@RequestBody UserCreateRequestDto request) {
         User user = userService.save(request.getName(), request.getAge(), request.getJob(), request.getSpecialty());
         return user;
     }
