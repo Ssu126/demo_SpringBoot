@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class AUserService implements UserServiceInterface {
+public class UserService implements UserServiceInterface {
     private static final Map<Integer, User> users;
 
     static {

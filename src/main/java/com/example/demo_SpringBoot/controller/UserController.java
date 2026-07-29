@@ -1,15 +1,16 @@
 package com.example.demo_SpringBoot.controller;
 
 import com.example.demo_SpringBoot.service.User;
+import com.example.demo_SpringBoot.service.UserService;
 import com.example.demo_SpringBoot.service.UserServiceInterface;
+import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -17,18 +18,25 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    private UserServiceInterface AUserService;
+    private UserServiceInterface userService;
+    @Autowired
+    private ApplicationContext applicationContext;
 
-    @GetMapping("")
+    @GetMapping("/bean")
+    @ResponseBody
+    public String bean() {
+        return applicationContext.getBean(UserServiceInterface.class).toString();
+    }
+
     public String userPage(Model model) {
-        List<User> users = AUserService.findAll();
+        List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "/users/list";
     }
 
     @GetMapping("/1/detail")
     public String detailPage(Model model) {
-        User user = AUserService.findById(1);
+        User user = userService.findById(1);
         model.addAttribute("id", user.getId());
         model.addAttribute("name", user.getName());
         model.addAttribute("age", user.getAge());
@@ -40,7 +48,7 @@ public class UserController {
     @GetMapping
     @ResponseBody
     public User detailData() {
-        User user = AUserService.findById(1);
+        User user = userService.findById(1);
         return user;
     }
 }
