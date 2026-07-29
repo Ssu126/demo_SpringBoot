@@ -56,4 +56,14 @@ public class UserController {
         User user = userService.findById(id);
         return user;
     }
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseBody
+    public User save(@RequestParam String name,
+                     @RequestParam Integer age,
+                     @RequestParam String job,
+                     @RequestParam String specialty) {
+        User user = userService.save(name, age, job, specialty);
+        return user;
+    }
 }
