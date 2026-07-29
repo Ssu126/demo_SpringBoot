@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
-//@Getter
+@Getter
 @AllArgsConstructor
 @ToString
 public class User {
