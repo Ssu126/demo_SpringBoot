@@ -1,12 +1,9 @@
 package com.example.demo_SpringBoot.service;
 
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
 public class UserService {
     private static final Map<Integer, User> users;
 
