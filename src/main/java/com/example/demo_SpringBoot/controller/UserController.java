@@ -17,8 +17,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    @Autowired
     private UserServiceInterface userService;
+
+    @Autowired
+    public void setUserService(UserServiceInterface userService) {
+        this.userService = userService;
+    }
+
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -28,6 +33,7 @@ public class UserController {
         return applicationContext.getBean(UserServiceInterface.class).toString();
     }
 
+    @GetMapping("")
     public String userPage(Model model) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
@@ -45,7 +51,7 @@ public class UserController {
         return "/users/detail";
     }
 
-    @GetMapping
+    @GetMapping("/1/data")
     @ResponseBody
     public User detailData() {
         User user = userService.findById(1);
