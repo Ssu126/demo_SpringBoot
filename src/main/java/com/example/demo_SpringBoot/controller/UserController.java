@@ -1,5 +1,6 @@
 package com.example.demo_SpringBoot.controller;
 
+import com.example.demo_SpringBoot.controller.dto.UserCreateRequestDto;
 import com.example.demo_SpringBoot.service.User;
 import com.example.demo_SpringBoot.service.UserService;
 import com.example.demo_SpringBoot.service.UserServiceInterface;
@@ -59,11 +60,8 @@ public class UserController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
-    public User save(@RequestParam String name,
-                     @RequestParam Integer age,
-                     @RequestParam String job,
-                     @RequestParam String specialty) {
-        User user = userService.save(name, age, job, specialty);
+    public User save(@ModelAttribute UserCreateRequestDto request) {
+        User user = userService.save(request.getName(), request.getAge(), request.getJob(), request.getSpecialty());
         return user;
     }
 }
