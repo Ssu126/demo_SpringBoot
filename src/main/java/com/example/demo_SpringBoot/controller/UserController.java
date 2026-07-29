@@ -3,6 +3,9 @@ package com.example.demo_SpringBoot.controller;
 import com.example.demo_SpringBoot.service.User;
 import com.example.demo_SpringBoot.service.UserService;
 import com.example.demo_SpringBoot.service.UserServiceInterface;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -16,13 +19,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/users")
+@RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserController {
-    private UserServiceInterface userService;
-
-    @Autowired
-    public void setUserService(UserServiceInterface userService) {
-        this.userService = userService;
-    }
+    UserServiceInterface userService;
 
     @Autowired
     private ApplicationContext applicationContext;
