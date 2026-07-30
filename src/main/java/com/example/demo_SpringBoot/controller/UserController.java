@@ -1,7 +1,10 @@
 package com.example.demo_SpringBoot.controller;
 
 import com.example.demo_SpringBoot.controller.dto.UserCreateRequestDto;
+import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
+import com.example.demo_SpringBoot.service.IRepository;
 import com.example.demo_SpringBoot.service.User;
+import com.example.demo_SpringBoot.service.UserRepository;
 import com.example.demo_SpringBoot.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -33,14 +36,14 @@ public class UserController {
 
     @GetMapping("")
     public String userPage(Model model) {
-        List<User> users = userService.findAll();
+        List<UserResponseDto> users = userService.findAll();
         model.addAttribute("users", users);
         return "/users/list";
     }
 
     @GetMapping("/detail")
     public String detailPage(@RequestParam Integer id, Model model) {
-        User user = userService.findById(id);
+        UserResponseDto user = userService.findById(id);
         model.addAttribute("id", user.getId());
         model.addAttribute("name", user.getName());
         model.addAttribute("age", user.getAge());
@@ -51,15 +54,15 @@ public class UserController {
 
     @GetMapping("/data")
     @ResponseBody
-    public User detailData(@RequestParam Integer id) {
-        User user = userService.findById(id);
+    public UserResponseDto detailData(@RequestParam Integer id) {
+        UserResponseDto user = userService.findById(id);
         return user;
     }
 
     @PostMapping("")
     @ResponseBody
-    public User save(@RequestBody @Valid UserCreateRequestDto request) {
-        User user = userService.save(request.getName(), request.getAge(), request.getJob(), request.getSpecialty());
+    public UserResponseDto save(@RequestBody @Valid UserCreateRequestDto request) {
+        UserResponseDto user = userService.save(request.getName(), request.getAge(), request.getJob(), request.getSpecialty());
         return user;
     }
 }
