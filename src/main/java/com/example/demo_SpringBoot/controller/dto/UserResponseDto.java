@@ -8,14 +8,13 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponseDto {
     private Integer id;
     private String name;
     private Integer age;
     private String job;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String specialty;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String address;
     private String postcode;
 
