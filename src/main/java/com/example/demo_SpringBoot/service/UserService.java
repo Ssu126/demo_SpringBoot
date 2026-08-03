@@ -2,14 +2,11 @@ package com.example.demo_SpringBoot.service;
 
 import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
 
     public UserResponseDto findById(Integer id) {
@@ -19,9 +16,9 @@ public class UserService {
 
     public List<UserResponseDto> findAll() {
         return userRepository.findAll()
-                .stream()
-                .map(UserResponseDto::from)
-                .toList();
+            .stream()
+            .map(UserResponseDto::from)
+            .toList();
     }
 
     public UserResponseDto save(String name, Integer age, String job, String specialty) {

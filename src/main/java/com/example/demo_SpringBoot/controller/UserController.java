@@ -3,8 +3,6 @@ package com.example.demo_SpringBoot.controller;
 import com.example.demo_SpringBoot.controller.dto.UserCreateRequestDto;
 import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
 import com.example.demo_SpringBoot.service.IRepository;
-import com.example.demo_SpringBoot.service.User;
-import com.example.demo_SpringBoot.service.UserRepository;
 import com.example.demo_SpringBoot.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -12,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class UserController {
+
     UserService userService;
 
     @Autowired
@@ -61,8 +62,11 @@ public class UserController {
 
     @PostMapping("")
     @ResponseBody
-    public UserResponseDto save(@RequestBody @Valid UserCreateRequestDto request) {
-        UserResponseDto user = userService.save(request.getName(), request.getAge(), request.getJob(), request.getSpecialty());
-        return user;
+    public ResponseEntity<UserResponseDto> save(@RequestBody @Valid UserCreateRequestDto request) {
+        UserResponseDto user = userService.save(request.getName(), request.getAge(),
+            request.getJob(), request.getSpecialty());
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(user);
     }
 }
