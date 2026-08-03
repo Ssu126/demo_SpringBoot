@@ -56,16 +56,22 @@ public class UserController {
     @GetMapping("/data")
     @ResponseBody
     public ResponseEntity<UserResponseDto> detailData(@RequestParam Integer id) {
-        UserResponseDto user = userService.findById(id);
-        return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(user);
+        try {
+            UserResponseDto user = userService.findById(id);
+            return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(user);
+        } catch (RuntimeException e) {
+            return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(null);
+        }
     }
 
     @PostMapping("")
     @ResponseBody
     public ResponseEntity<UserResponseDto> save(@RequestBody @Valid UserCreateRequestDto request) {
-        UserResponseDto user = userSeㅎrvice.save(request.getName(), request.getAge(),
+        UserResponseDto user = userService.save(request.getName(), request.getAge(),
             request.getJob(), request.getSpecialty());
         return ResponseEntity
             .status(HttpStatus.CREATED)
