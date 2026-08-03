@@ -2,6 +2,7 @@ package com.example.demo_SpringBoot.controller.dto;
 
 import com.example.demo_SpringBoot.service.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,10 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponseDto {
+
+    @JsonProperty("userId")
     private Integer id;
+    @JsonProperty("username")
     private String name;
     private Integer age;
     private String job;
@@ -20,13 +24,13 @@ public class UserResponseDto {
 
     public static UserResponseDto from(User entity) {
         return new UserResponseDto(
-                entity.getId(),
-                entity.getName(),
-                entity.getAge(),
-                entity.getJob(),
-                entity.getSpecialty(),
-                null,
-                null
+            entity.getId(),
+            entity.getName(),
+            entity.getAge(),
+            entity.getJob(),
+            entity.getSpecialty(),
+            null,
+            null
         );
     }
 }
