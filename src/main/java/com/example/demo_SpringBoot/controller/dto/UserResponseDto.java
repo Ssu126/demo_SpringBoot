@@ -1,10 +1,7 @@
 package com.example.demo_SpringBoot.controller.dto;
 
 import com.example.demo_SpringBoot.service.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -13,7 +10,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({"userid", "username"})
+@JsonPropertyOrder({"userId", "username"})
 public class UserResponseDto {
 
     @JsonProperty("userId")
@@ -24,6 +21,7 @@ public class UserResponseDto {
     private Integer age;
     private String job;
     private String specialty;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
     private String address;
     private String postcode;

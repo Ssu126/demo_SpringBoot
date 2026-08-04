@@ -49,7 +49,7 @@ public class UserController {
         model.addAttribute("name", user.getName());
         model.addAttribute("age", user.getAge());
         model.addAttribute("job", user.getJob());
-        model.addAttribute("speciality", user.getSpecialty());
+        model.addAttribute("specialty", user.getSpecialty());
         return "/users/detail";
     }
 

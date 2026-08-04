@@ -9,6 +9,7 @@ public class UserRepository implements IRepository<Integer, User> {
 
     private static final Map<Integer, User> users;
 
+
     static {
         users = new HashMap<>();
         users.put(1,
