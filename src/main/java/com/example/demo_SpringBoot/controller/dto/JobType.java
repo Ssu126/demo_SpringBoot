@@ -1,8 +1,7 @@
 package com.example.demo_SpringBoot.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import java.util.Arrays;
 import java.util.List;
 import lombok.AccessLevel;
@@ -20,13 +19,13 @@ public enum JobType {
     String name;
     List<String> titles;
 
-    @JsonCreator
-    public static JobType deserialize(String job) {
+    @JsonCreator(mode = Mode.DELEGATING)
+    public static JobType deserialize(String name) {
         for (JobType each : JobType.values()) {
-            if(each.getName().equals(job)) {
+            if (each.getName().equals(name)) {
                 return each;
             }
         }
-        throw new RuntimeException("JobType 내 해당하는 Enum이 존재하지 않습니다. name : " + job);
+        throw new RuntimeException("JobType 내 해당하는 Enum이 존재하지 않습니다. name : " + name);
     }
 }
