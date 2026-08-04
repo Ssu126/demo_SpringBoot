@@ -14,8 +14,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,14 +61,13 @@ public class UserController {
     public BaseResponse<UserResponseDto> detailData(@RequestParam Integer id) {
         try {
             UserResponseDto user = userService.findById(id);
-            return BaseResponse.of(true, null, null, user);
+            return BaseResponse.success(user);
         } catch (CustomException e) {
             log.warn(e.getMessage(), e);
-            return BaseResponse.of(false, e.getType().getType(), e.getType().getDesc(), null);
+            return BaseResponse.failure(e.getType());
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return BaseResponse.of(false, ExceptionType.UNCLASSIFIED_ERROR.getType(),
-                ExceptionType.UNCLASSIFIED_ERROR.getDesc(), null);
+            return BaseResponse.failure(ExceptionType.UNCLASSIFIED_ERROR);
         }
     }
 
@@ -80,14 +77,13 @@ public class UserController {
         try {
             UserResponseDto user = userService.save(request.getName(), request.getAge(),
                 request.getJob(), request.getSpecialty());
-            return BaseResponse.of(true, null, null, user);
+            return BaseResponse.success(user);
         } catch (CustomException e) {
             log.warn(e.getMessage(), e);
-            return BaseResponse.of(false, e.getType().getType(), e.getType().getDesc(), null);
+            return BaseResponse.failure(e.getType());
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return BaseResponse.of(false, ExceptionType.UNCLASSIFIED_ERROR.getType(),
-                ExceptionType.UNCLASSIFIED_ERROR.getDesc(), null);
+            return BaseResponse.failure(ExceptionType.UNCLASSIFIED_ERROR);
         }
     }
 }
