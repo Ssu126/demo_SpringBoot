@@ -13,9 +13,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public enum JobType {
-    @JsonProperty("Developer 개발자")
     DEVELOPER("Developer", Arrays.asList("Frontend", "Backend")),
-    @JsonProperty("Engineer 엔지니어")
     ENGINEER("Engineer", Arrays.asList("DevOps", "SRE"));
 
     String name;
