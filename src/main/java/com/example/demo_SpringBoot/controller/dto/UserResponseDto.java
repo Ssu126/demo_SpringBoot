@@ -21,7 +21,7 @@ public class UserResponseDto {
     private Integer age;
     private String job;
     private String specialty;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateFormat
     private LocalDateTime createdAt;
     private String address;
     private String postcode;
