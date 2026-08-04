@@ -1,5 +1,6 @@
 package com.example.demo_SpringBoot.service;
 
+import com.example.demo_SpringBoot.controller.dto.JobType;
 import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class UserService {
             .toList();
     }
 
-    public UserResponseDto save(String name, Integer age, String job, String specialty) {
+    public UserResponseDto save(String name, Integer age, JobType job, String specialty) {
         User user = userRepository.save(
             new User(null, name, age, job, specialty, LocalDateTime.now()));
         return UserResponseDto.from(user);

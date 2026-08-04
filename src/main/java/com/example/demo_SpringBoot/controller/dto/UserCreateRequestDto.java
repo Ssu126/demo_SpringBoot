@@ -11,11 +11,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserCreateRequestDto {
+
     @NotBlank
     private String name;
     @Min(10)
     private Integer age;
     @NonNull
-    private String job;
+    private JobType job;
     private String specialty = "(empty)";
 }
