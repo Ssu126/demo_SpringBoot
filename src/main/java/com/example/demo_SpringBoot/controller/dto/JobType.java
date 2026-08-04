@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,6 @@ public enum JobType {
                 return each;
             }
         }
-        throw new RuntimeException("JobType 내 해당하는 Enum이 존재하지 않습니다. name : " + name);
+        throw new NoSuchElementException("JobType 내 해당하는 Enum이 존재하지 않습니다. name : " + name);
     }
 }
