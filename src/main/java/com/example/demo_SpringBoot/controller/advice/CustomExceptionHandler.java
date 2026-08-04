@@ -11,12 +11,14 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @ControllerAdvice
 public class CustomExceptionHandler {
 
     @ExceptionHandler
+    @ResponseBody
     public BaseResponse<Void> handle(CustomException e) {
         ExceptionType type = e.getType();
         log.atLevel(type.getLevel()).setCause(e).log(e.getMessage());
@@ -24,6 +26,7 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler
+    @ResponseBody
     public BaseResponse<List<FieldErrorDto>> handle(MethodArgumentNotValidException e) {
         List<FieldErrorDto> errors = new ArrayList<>();
         StringBuilder messageBuilder = new StringBuilder();
@@ -40,6 +43,7 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler
+    @ResponseBody
     public BaseResponse<Void> handle(Exception e) {
         log.error(e.getMessage(), e);
         return BaseResponse.failure(ExceptionType.UNCLASSIFIED_ERROR);
