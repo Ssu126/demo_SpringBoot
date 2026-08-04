@@ -5,6 +5,7 @@ import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
 import com.example.demo_SpringBoot.service.IRepository;
 import com.example.demo_SpringBoot.service.UserService;
 import jakarta.validation.Valid;
+import java.util.NoSuchElementException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -61,9 +62,13 @@ public class UserController {
             return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(user);
-        } catch (RuntimeException e) {
+        } catch (NoSuchElementException e) {
             return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
+                .body(null);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .body(null);
         }
     }
@@ -71,10 +76,20 @@ public class UserController {
     @PostMapping("")
     @ResponseBody
     public ResponseEntity<UserResponseDto> save(@RequestBody @Valid UserCreateRequestDto request) {
-        UserResponseDto user = userService.save(request.getName(), request.getAge(),
-            request.getJob(), request.getSpecialty());
-        return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body(user);
+        try {
+            UserResponseDto user = userService.save(request.getName(), request.getAge(),
+                request.getJob(), request.getSpecialty());
+            return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(user);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(null);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(null);
+        }
     }
 }
