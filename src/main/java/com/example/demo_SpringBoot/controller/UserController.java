@@ -2,7 +2,9 @@ package com.example.demo_SpringBoot.controller;
 
 import com.example.demo_SpringBoot.controller.dto.UserCreateRequestDto;
 import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
+import com.example.demo_SpringBoot.controller.dto.common.BaseResponse;
 import com.example.demo_SpringBoot.exception.CustomException;
+import com.example.demo_SpringBoot.exception.ExceptionType;
 import com.example.demo_SpringBoot.service.IRepository;
 import com.example.demo_SpringBoot.service.UserService;
 import jakarta.validation.Valid;
@@ -58,44 +60,34 @@ public class UserController {
 
     @GetMapping("/data")
     @ResponseBody
-    public ResponseEntity<UserResponseDto> detailData(@RequestParam Integer id) {
+    public BaseResponse<UserResponseDto> detailData(@RequestParam Integer id) {
         try {
             UserResponseDto user = userService.findById(id);
-            return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(user);
+            return BaseResponse.of(true, null, null, user);
         } catch (CustomException e) {
             log.warn(e.getMessage(), e);
-            return ResponseEntity
-                .status(e.getType().getStatus())
-                .body(null);
+            return BaseResponse.of(false, e.getType().getType(), e.getType().getDesc(), null);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(null);
+            return BaseResponse.of(false, ExceptionType.UNCLASSIFIED_ERROR.getType(),
+                ExceptionType.UNCLASSIFIED_ERROR.getDesc(), null);
         }
     }
 
     @PostMapping("")
     @ResponseBody
-    public ResponseEntity<UserResponseDto> save(@RequestBody @Valid UserCreateRequestDto request) {
+    public BaseResponse<UserResponseDto> save(@RequestBody @Valid UserCreateRequestDto request) {
         try {
             UserResponseDto user = userService.save(request.getName(), request.getAge(),
                 request.getJob(), request.getSpecialty());
-            return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(user);
+            return BaseResponse.of(true, null, null, user);
         } catch (CustomException e) {
             log.warn(e.getMessage(), e);
-            return ResponseEntity
-                .status(e.getType().getStatus())
-                .body(null);
+            return BaseResponse.of(false, e.getType().getType(), e.getType().getDesc(), null);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(null);
+            return BaseResponse.of(false, ExceptionType.UNCLASSIFIED_ERROR.getType(),
+                ExceptionType.UNCLASSIFIED_ERROR.getDesc(), null);
         }
     }
 }
