@@ -9,20 +9,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepository implements IRepository<Integer, User> {
-
     private static final Map<Integer, User> users;
-
 
     static {
         users = new HashMap<>();
-        users.put(1,
-            new User(1, "Aaron", 10, JobType.DEVELOPER, "Backend",
-                LocalDateTime.now().plusMinutes(10)));
-        users.put(2,
-            new User(2, "Baron", 20, JobType.DEVELOPER, "Frontend",
-                LocalDateTime.now().plusMinutes(20)));
-        users.put(3, new User(3, "Caron", 30, JobType.ENGINEER, "DevOps/SRE",
-            LocalDateTime.now().plusMinutes(30)));
+        users.put(1, new User(1, "Aaron", 10, JobType.DEVELOPER, "Backend", LocalDateTime.now().plusMinutes(10)));
+        users.put(2, new User(2, "Baron", 20, JobType.DEVELOPER, "Frontend", LocalDateTime.now().plusMinutes(20)));
+        users.put(3, new User(3, "Caron", 30, JobType.ENGINEER, "DevOps/SRE", LocalDateTime.now().plusMinutes(30)));
     }
 
     public User findById(Integer id) {
