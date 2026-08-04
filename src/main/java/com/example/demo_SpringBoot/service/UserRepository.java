@@ -1,5 +1,6 @@
 package com.example.demo_SpringBoot.service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import org.springframework.stereotype.Repository;
 
@@ -10,9 +11,12 @@ public class UserRepository implements IRepository<Integer, User> {
 
     static {
         users = new HashMap<>();
-        users.put(1, new User(1, "Aaron", 10, "Developer", "Backend"));
-        users.put(2, new User(2, "Baron", 20, "Developer", "Frontend"));
-        users.put(3, new User(3, "Caron", 30, "Engineer", "DevOps/SRE"));
+        users.put(1,
+            new User(1, "Aaron", 10, "Developer", "Backend", LocalDateTime.now().plusMinutes(10)));
+        users.put(2,
+            new User(2, "Baron", 20, "Developer", "Frontend", LocalDateTime.now().plusMinutes(20)));
+        users.put(3, new User(3, "Caron", 30, "Engineer", "DevOps/SRE",
+            LocalDateTime.now().plusMinutes(30)));
     }
 
     public User findById(Integer id) {
