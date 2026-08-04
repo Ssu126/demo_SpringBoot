@@ -5,6 +5,7 @@ import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
 import com.example.demo_SpringBoot.service.IRepository;
 import com.example.demo_SpringBoot.service.UserService;
 import jakarta.validation.Valid;
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.NoSuchElementException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +63,7 @@ public class UserController {
             return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(user);
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | UserNotFoundException e) {
             return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(null);
