@@ -7,7 +7,7 @@ public class CustomException extends RuntimeException {
 
     private ExceptionType type;
 
-    public CustomException(Exception type) {
+    public CustomException(ExceptionType type) {
         super();
     }
 

@@ -2,6 +2,7 @@ package com.example.demo_SpringBoot.service;
 
 import com.example.demo_SpringBoot.controller.dto.JobType;
 import com.example.demo_SpringBoot.exception.CustomException;
+import com.example.demo_SpringBoot.exception.ExceptionType;
 import java.time.LocalDateTime;
 import java.util.*;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,7 @@ public class UserRepository implements IRepository<Integer, User> {
     public User findById(Integer id) {
         Optional<User> retrieved = Optional.ofNullable(users.get(id));
         return retrieved.orElseThrow(
-            () -> new CustomException("유저가 존재하지 않습니다. id : " + id));
+            () -> new CustomException(ExceptionType.USER_NOT_FOUND, id));
     }
 
     public List<User> findAll() {

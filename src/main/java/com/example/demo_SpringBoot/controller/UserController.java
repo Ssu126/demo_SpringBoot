@@ -6,10 +6,10 @@ import com.example.demo_SpringBoot.exception.CustomException;
 import com.example.demo_SpringBoot.service.IRepository;
 import com.example.demo_SpringBoot.service.UserService;
 import jakarta.validation.Valid;
-import java.util.NoSuchElementException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -64,10 +65,12 @@ public class UserController {
                 .status(HttpStatus.OK)
                 .body(user);
         } catch (CustomException e) {
+            log.warn(e.getMessage(), e);
             return ResponseEntity
                 .status(e.getType().getStatus())
                 .body(null);
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(null);
@@ -84,10 +87,12 @@ public class UserController {
                 .status(HttpStatus.CREATED)
                 .body(user);
         } catch (CustomException e) {
+            log.warn(e.getMessage(), e);
             return ResponseEntity
                 .status(e.getType().getStatus())
                 .body(null);
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(null);
