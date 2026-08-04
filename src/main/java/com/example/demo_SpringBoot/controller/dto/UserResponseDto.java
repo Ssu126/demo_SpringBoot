@@ -3,6 +3,7 @@ package com.example.demo_SpringBoot.controller.dto;
 import com.example.demo_SpringBoot.service.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({"userid", "username"})
 public class UserResponseDto {
 
     @JsonProperty("userId")
