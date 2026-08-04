@@ -1,5 +1,7 @@
 package com.example.demo_SpringBoot.controller.dto;
 
+import com.example.demo_SpringBoot.exception.CustomException;
+import com.example.demo_SpringBoot.exception.ExceptionType;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import java.util.Arrays;
@@ -27,6 +29,7 @@ public enum JobType {
                 return each;
             }
         }
-        throw new NoSuchElementException("JobType 내 해당하는 Enum이 존재하지 않습니다. name : " + name);
+        throw new CustomException(ExceptionType.INVALID_INPUT,
+            "JobType 내 해당하는 Enum이 존재하지 않습니다. name : " + name);
     }
 }

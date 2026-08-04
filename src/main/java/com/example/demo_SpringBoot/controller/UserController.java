@@ -2,10 +2,10 @@ package com.example.demo_SpringBoot.controller;
 
 import com.example.demo_SpringBoot.controller.dto.UserCreateRequestDto;
 import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
+import com.example.demo_SpringBoot.exception.CustomException;
 import com.example.demo_SpringBoot.service.IRepository;
 import com.example.demo_SpringBoot.service.UserService;
 import jakarta.validation.Valid;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.NoSuchElementException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -63,13 +63,9 @@ public class UserController {
             return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(user);
-        } catch (NoSuchElementException | UserNotFoundException e) {
+        } catch (CustomException e) {
             return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(null);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
+                .status(e.getType().getStatus())
                 .body(null);
         } catch (Exception e) {
             return ResponseEntity
@@ -87,13 +83,9 @@ public class UserController {
             return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(user);
-        } catch (NoSuchElementException e) {
+        } catch (CustomException e) {
             return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(null);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
+                .status(e.getType().getStatus())
                 .body(null);
         } catch (Exception e) {
             return ResponseEntity
