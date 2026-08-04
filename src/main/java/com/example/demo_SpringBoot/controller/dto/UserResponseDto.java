@@ -1,6 +1,7 @@
 package com.example.demo_SpringBoot.controller.dto;
 
 import com.example.demo_SpringBoot.service.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,6 +19,7 @@ public class UserResponseDto {
     private Integer id;
     @JsonProperty("username")
     private String name;
+    @JsonIgnore
     private Integer age;
     private String job;
     private String specialty;

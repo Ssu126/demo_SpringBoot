@@ -1,7 +1,9 @@
 package com.example.demo_SpringBoot.service;
 
 import java.util.*;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserRepository implements IRepository<Integer, User> {
 
     private static final Map<Integer, User> users;

@@ -3,7 +3,9 @@ package com.example.demo_SpringBoot.service;
 import com.example.demo_SpringBoot.controller.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
 public class UserService {
 
